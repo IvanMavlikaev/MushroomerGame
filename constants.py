@@ -33,7 +33,7 @@ height_tree['big_fir_tree.png'] = 135
 height_tree['birch_tree.png'] = 135
 height_tree['stump.png'] = 30
 
-BACKGROUND = pg.image.load('fon_1.png')
+BACKGROUND = pg.image.load('backgroung_1.png')
 #font = pg.font.SysFont("notosans", font_size) #устанавливает шрифт
 
 tree_list = ['fir_tree.png', 'big_fir_tree.png', 'birch_tree.png']
