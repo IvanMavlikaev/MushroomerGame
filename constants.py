@@ -36,5 +36,5 @@ height_tree['stump.png'] = 30
 BACKGROUND = pg.image.load('fon_1.png')
 #font = pg.font.SysFont("notosans", font_size) #устанавливает шрифт
 
-tree_list = ['fir_tree.png', 'big_fir_tree.png', 'birch_tree.png', 'stump.png']
+tree_list = ['fir_tree.png', 'big_fir_tree.png', 'birch_tree.png']
 mushroom_list = ['krasnogolovik.png', 'fly_agaric.png']

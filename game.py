@@ -26,17 +26,14 @@ def main():
     boost_up = 0
     height = 0
 
-    tree_list = ['fir_tree.png', 'big_fir_tree.png', 'birch_tree.png', 'stump.png']
-    mushroom_list = ['krasnogolovik.png', 'fly_agaric.png']
-    coord_tree_list = [200, 300, 700, 850]
-    coord_mushroom_list = [800]
-
     way = 0 # переменная для счётчика
     mushrooms_count = 0 # счётчик грибов
 
     krasnogolovik = Sprite(1000, 235, 'krasnogolovik.png')
     fly_agaric = Sprite(1000, 235, 'fly_agaric.png')
+    birch_tree = Sprite(300, 280 - height_tree['birch_tree.png'], 'birch_tree.png')
     mushrooms_list = SpriteList([krasnogolovik])
+    trees = SpriteList([birch_tree])
 
     while not game_over:
         way += 5
@@ -58,7 +55,7 @@ def main():
 
 
 
-        for i in range(len(mushrooms_list.list)):
+        for i in range(mushrooms_list.size):
             mushrooms_list.update_coordinats(-10, 0)
             screen.blit(pg.image.load(mushrooms_list.list[i].name), (mushrooms_list.list[i].x, mushrooms_list.list[i].y))
             if touch(mushrooms_list.list[i], height):
@@ -75,6 +72,7 @@ def main():
                         krasnogolovik.x = 1000
                         mushrooms_list.add(krasnogolovik)
 
+
         while mushrooms_list.size and mushrooms_list.list[0].x < -100:
             mushrooms_list.pop()
             choice = random.choice([1, 2])
@@ -84,6 +82,19 @@ def main():
             else:
                 krasnogolovik.x = 1000
                 mushrooms_list.add(krasnogolovik)
+
+        for i in range(trees.size):
+            trees.update_coordinats(-10, 0)
+            screen.blit(pg.image.load(trees.list[i].name),
+                        (trees.list[i].x, trees.list[i].y))
+
+        while trees.size and trees.list[0].x < -100:
+            trees.pop()
+            choice = random.choice([1])
+            if choice == 1:
+                birch_tree.x = 1000
+                trees.add(birch_tree)
+
 
 
         for event in pg.event.get():

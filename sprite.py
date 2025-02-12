@@ -7,7 +7,6 @@ class Sprite:
     def update_coordinats(self, delta_x, delta_y):
         self.x += delta_x
         self.y += delta_y
-        print(self.x, self.y)
 
     def copy(self, other):
         self.x = other.x
