@@ -34,6 +34,8 @@ def main():
     birch_tree = Sprite(300, 280 - height_tree['birch_tree.png'], 'birch_tree.png')
     mushrooms_list = SpriteList([krasnogolovik])
     trees = SpriteList([birch_tree])
+    stump = Sprite(1200, 280-height_tree['stump.png'], 'stump.png')
+    barrier = SpriteList([stump])
 
     while not game_over:
         way += 5
@@ -52,8 +54,6 @@ def main():
         pg.draw.rect(screen, WHITE, (5, 36, 100, 25))
         mushrooms_counter = font.render('Грибов: ' + str(mushrooms_count), True, BLACK)
         screen.blit(mushrooms_counter, (10, 41))
-
-
 
         for i in range(mushrooms_list.size):
             mushrooms_list.update_coordinats(-10, 0)
@@ -95,6 +95,19 @@ def main():
                 birch_tree.x = 1000
                 trees.add(birch_tree)
 
+        for i in range(barrier.size):
+            barrier.update_coordinats(-10, 0)
+            screen.blit(pg.image.load(barrier.list[i].name),
+                        (barrier.list[i].x, barrier.list[i].y))
+            if touch(barrier.list[i], height):
+                game_over = True
+
+        while barrier.size and barrier.list[0].x < -100:
+            barrier.pop()
+            choice = random.choice([1])
+            if choice == 1:
+                stump.x = 1000
+                barrier.add(stump)
 
 
         for event in pg.event.get():
