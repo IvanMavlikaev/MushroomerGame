@@ -30,6 +30,7 @@ def main():
     mushrooms_count = 0 # счётчик грибов
 
     krasnogolovik = Sprite(1000, 235, 'krasnogolovik.png')
+    red = Sprite(1000, 235, 'red.png')
     fly_agaric = Sprite(1000, 235, 'fly_agaric.png')
     birch_tree = Sprite(300, 280 - height_tree['birch_tree.png'], 'birch_tree.png')
     mushrooms_list = SpriteList([krasnogolovik])
@@ -64,24 +65,30 @@ def main():
                 else:
                     mushrooms_count += 1
                     mushrooms_list.pop()
-                    choice = random.choice([1, 2])
+                    choice = random.choice([1, 2, 3])
                     if choice == 1:
                         fly_agaric.x = 1000
                         mushrooms_list.add(fly_agaric)
-                    else:
+                    elif choice == 2:
                         krasnogolovik.x = 1000
                         mushrooms_list.add(krasnogolovik)
+                    else:
+                        red.x = 1000
+                        mushrooms_list.add(red)
 
 
         while mushrooms_list.size and mushrooms_list.list[0].x < -100:
             mushrooms_list.pop()
-            choice = random.choice([1, 2])
+            choice = random.choice([1, 2, 3])
             if choice == 1:
                 fly_agaric.x = 1000
                 mushrooms_list.add(fly_agaric)
-            else:
+            elif choice == 2:
                 krasnogolovik.x = 1000
                 mushrooms_list.add(krasnogolovik)
+            else:
+                red.x = 1000
+                mushrooms_list.add(red)
 
         for i in range(trees.size):
             trees.update_coordinats(-10, 0)
@@ -94,7 +101,8 @@ def main():
             if choice == 1:
                 birch_tree.x = 1000
                 trees.add(birch_tree)
-
+        if abs(barrier.list[0].x - mushrooms_list.list[0].x) < 100:
+            barrier.list[0].x = mushrooms_list.list[0].x + 100
         for i in range(barrier.size):
             barrier.update_coordinats(-10, 0)
             screen.blit(pg.image.load(barrier.list[i].name),
@@ -112,7 +120,7 @@ def main():
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
-                game_over = True
+                return
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_UP:
                     if not jump:
@@ -138,7 +146,6 @@ def main():
         player_anim_count %= 12
         pg.display.update()
         clock.tick(20)
-
     for i in range(50):
         pg.draw.rect(screen, (0, 0, 0), (140, 90, 520, 120))
         pg.draw.rect(screen, WHITE, (150, 100, 500, 100))
